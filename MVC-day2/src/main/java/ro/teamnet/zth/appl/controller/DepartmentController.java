@@ -4,6 +4,7 @@ import ro.teamnet.zth.api.annotations.Z2HController;
 import ro.teamnet.zth.api.annotations.Z2HRequestMethod;
 import ro.teamnet.zth.api.annotations.Z2HRequestParam;
 import ro.teamnet.zth.appl.domain.Department;
+import ro.teamnet.zth.appl.service.DepartmentServceImpl;
 import ro.teamnet.zth.appl.service.DepartmentService;
 
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 public class DepartmentController {
 
     public DepartmentService departmentService;
+
+    public DepartmentController () { departmentService = new DepartmentServceImpl(); }
 
     @Z2HRequestMethod(urlPath = "/all")
     public List<Department> getAllDepartments() {

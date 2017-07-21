@@ -6,6 +6,7 @@ import ro.teamnet.zth.api.annotations.Z2HRequestObject;
 import ro.teamnet.zth.api.annotations.Z2HRequestParam;
 import ro.teamnet.zth.appl.domain.Job;
 import ro.teamnet.zth.appl.service.JobService;
+import ro.teamnet.zth.appl.service.JobServiceImpl;
 import ro.teamnet.zth.fmk.domain.HttpMethod;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
 @Z2HController(urlPath = "/jobs")
 public class JobController {
     private JobService jobService;
+
+    public JobController() { jobService = new JobServiceImpl(); }
 
     @Z2HRequestMethod(urlPath = "/all")
     public List<Job> getAll() {
