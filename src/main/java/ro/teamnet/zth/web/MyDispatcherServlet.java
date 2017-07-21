@@ -32,24 +32,28 @@ public class MyDispatcherServlet extends HttpServlet {
         try {
             ArrayList<Class> classes = (ArrayList<Class>)AnnotationScanUtils.getClasses("ro.teamnet.zth.appl.controllers");
             for (Class cl : classes) {
-                MyController an = (MyController) cl.getDeclaredAnnotation(MyController.class);
+                if (cl.isAnnotationPresent(MyController.class)) {
+                    MyController an = (MyController) cl.getDeclaredAnnotation(MyController.class);
 
-                Method[] methods = cl.getMethods();
+                    Method[] methods = cl.getMethods();
 
-                for (Method m : methods) {
-                    m.setAccessible(true);
+                    for (Method m : methods) {
+                        if (m.isAnnotationPresent(MyRequestMethod.class)) {
+                            m.setAccessible(true);
 
-                    MyRequestMethod anM = (MyRequestMethod) cl.getDeclaredAnnotation(MyRequestMethod.class);
+                            MyRequestMethod anM = (MyRequestMethod) cl.getDeclaredAnnotation(MyRequestMethod.class);
 
-                    MethodAttributes ma = new MethodAttributes();
+                            MethodAttributes ma = new MethodAttributes();
 
-                    ma.setControllerClass(cl.getSimpleName());
-                    ma.setMethodName(anM.urlPath());
-                    ma.setMethodType(anM.methodType());
+                            ma.setControllerClass(cl.getName());
+                            ma.setMethodName(anM.urlPath());
+                            ma.setMethodType(anM.methodType());
 
-                    String url = "/app/mvc" + an.urlPath() + anM.urlPath() + anM.methodType();
+                            String url = an.urlPath() + anM.urlPath() + anM.methodType();
 
-                    allowedMethods.put(url, ma);
+                            allowedMethods.put(url, ma);
+                        }
+                    }
                 }
             }
         } catch (ClassNotFoundException | IOException e) {
@@ -79,7 +83,7 @@ public class MyDispatcherServlet extends HttpServlet {
 
     private String dispatch(HttpServletRequest request, String reqType) throws ServletException, IOException{
 
-        String key = request.getRequestURI() + reqType;
+        String key = request.getPathInfo() + reqType;
 
         MethodAttributes attributes = allowedMethods.get(key);
 
@@ -88,24 +92,19 @@ public class MyDispatcherServlet extends HttpServlet {
         String result = null;
 
         try {
-            Method testMethod = className.getClass().getMethod(attributes.getMethodName());
-            testMethod.setAccessible(true);
+            Class cls = Class.forName(className);
             try {
+                Method testMethod = cls.getMethod(attributes.getMethodName());
+                testMethod.setAccessible(true);
                 try {
-                    Class cls = Class.forName(className);
-                    try {
-                        result = (String) testMethod.invoke(cls.newInstance());
-                    } catch (InstantiationException e) {
-                        e.printStackTrace();
-                    }
-                } catch (ClassNotFoundException e) {
+                    result = (String) testMethod.invoke(cls.newInstance());
+                } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
                     e.printStackTrace();
                 }
-            } catch (IllegalAccessException | InvocationTargetException e) {
+            } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
-
-        } catch (NoSuchMethodException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
