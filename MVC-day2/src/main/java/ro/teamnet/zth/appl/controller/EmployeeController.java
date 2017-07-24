@@ -28,12 +28,12 @@ public class EmployeeController {
     }
 
     @Z2HRequestMethod(urlPath = "/one")
-    public Employee getOneEmployee(@Z2HRequestParam(name = "id") Long employeeId) {
+    public Employee getOneEmployee(@Z2HRequestParam(name = "employeeId") Long employeeId) {
         return employeeService.findOneEmployee(employeeId);
     }
 
     @Z2HRequestMethod(urlPath = "/one", methodType = HttpMethod.DELETE)
-    public Boolean deleteOneEmployee(@Z2HRequestParam(name = "id") Long employeeId) {
+    public Boolean deleteOneEmployee(@Z2HRequestParam(name = "employeeId") Long employeeId) {
         return employeeService.delete(employeeId);
     }
 

@@ -40,7 +40,7 @@ public class EntityUtilsTest {
     @Test
     public void testGetSqlValue() throws IllegalAccessException {
         Department d = new Department();
-        d.setId(5l);
+        d.setDepartmentId(5l);
         Object value = EntityUtils.getSqlValue(d);
         assertTrue(value instanceof Long);
         assertEquals(value, 5l);

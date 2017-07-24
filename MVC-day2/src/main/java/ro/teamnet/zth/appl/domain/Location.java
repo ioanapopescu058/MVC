@@ -8,7 +8,7 @@ import ro.teamnet.zth.api.annotations.Table;
 public class Location {
 
     @Id(name = "location_id")
-    private Long id;
+    private Long locationId;
 
     @Column(name = "street_address")
     private String streetAddress;
@@ -23,12 +23,12 @@ public class Location {
     private String stateProvince;
 
 
-    public Long getId() {
-        return id;
+    public Long getLocationId() {
+        return locationId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setLocationId(Long locationId) {
+        this.locationId = locationId;
     }
 
     public String getStreetAddress() {
@@ -70,7 +70,7 @@ public class Location {
         if (obj == null || getClass() != obj.getClass()) return false;
 
         Location location = (Location) obj;
-        if (!id.equals(location.id)) return false;
+        if (!locationId.equals(location.locationId)) return false;
         if (!city.equals(location.city)) return false;
         if (!streetAddress.equals(location.streetAddress)) return false;
         if (!postalCode.equals(location.postalCode)) return false;
@@ -82,7 +82,7 @@ public class Location {
     @Override
     public String toString() {
         return "Location{" +
-                "id=" + id +
+                "locationId=" + locationId +
                 ", streetAddress='" + streetAddress + '\'' +
                 ", postalCode='" + postalCode + '\'' +
                 ", city='" + city + '\'' +

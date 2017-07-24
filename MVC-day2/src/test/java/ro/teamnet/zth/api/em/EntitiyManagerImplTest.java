@@ -4,9 +4,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import ro.teamnet.zth.appl.domain.Department;
-import ro.teamnet.zth.appl.domain.Employee;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +21,7 @@ public class EntitiyManagerImplTest {
     @Test
     public void aTestFindById() {
         dep = entityManager.findById(Department.class, 10L);
-        assertTrue(dep.getId() == 10L);
+        assertTrue(dep.getDepartmentId() == 10L);
         assertTrue(dep.getDepartmentName().equals("Administration"));
     }
 
@@ -38,12 +36,12 @@ public class EntitiyManagerImplTest {
         dep.setDepartmentName("Sales");
         dep.setLocation(1000l);
         dep = (Department) entityManager.insert(dep);
-        assertEquals(entityManager.findById(Department.class, dep.getId()), dep);
+        assertEquals(entityManager.findById(Department.class, dep.getDepartmentId()), dep);
     }
 
     @Test
     public void dTestUpdate() {
-        dep.setId(271L);
+        dep.setDepartmentId(271L);
         dep.setDepartmentName("Sales updates");
         dep.setLocation(1000l);
         dep = entityManager.update(dep);
@@ -52,9 +50,9 @@ public class EntitiyManagerImplTest {
 
     @Test
     public void eTestDelete() {
-        dep.setId(271L);
+        dep.setDepartmentId(271L);
         entityManager.delete(dep);
-        assertTrue(entityManager.findById(Department.class, dep.getId()) == null);
+        assertTrue(entityManager.findById(Department.class, dep.getDepartmentId()) == null);
     }
 
     @Test

@@ -17,13 +17,13 @@ public class JobDaoTest {
 
     @Test
     public void aTestInsertJob() {
-        job.setId("IT_DEP");
+        job.setJobId("IT_DEP");
         job.setJobTitle("title");
         job.setMaxSalary(10);
         job.setMinSalary(1);
         job = jobDao.insertJob(job);
 
-        assertEquals(jobDao.getJobById(job.getId()), job);
+        assertEquals(jobDao.getJobById(job.getJobId()), job);
 
     }
 
@@ -32,13 +32,13 @@ public class JobDaoTest {
         job.setMaxSalary(20);
         job = jobDao.updateJob(job);
 
-        assertEquals(jobDao.getJobById(job.getId()), job);
+        assertEquals(jobDao.getJobById(job.getJobId()), job);
     }
 
     @Test
     public void cTestDeleteJob() {
         jobDao.deleteJob(job);
-        Job locById = jobDao.getJobById(job.getId());
+        Job locById = jobDao.getJobById(job.getJobId());
 
         assertNull(locById);
     }

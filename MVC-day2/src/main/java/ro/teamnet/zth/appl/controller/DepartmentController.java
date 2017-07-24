@@ -22,7 +22,7 @@ public class DepartmentController {
     }
 
     @Z2HRequestMethod(urlPath = "/one")
-    public Department getOneDepartment(@Z2HRequestParam(name = "id") Long departmentId) {
+    public Department getOneDepartment(@Z2HRequestParam(name = "departmentId") Long departmentId) {
         return departmentService.findOne(departmentId);
     }
 }

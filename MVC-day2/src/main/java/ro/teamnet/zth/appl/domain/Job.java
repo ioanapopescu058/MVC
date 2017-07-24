@@ -8,7 +8,7 @@ import ro.teamnet.zth.api.annotations.Table;
 public class Job {
 
     @Id(name = "JOB_ID")
-    private String id;
+    private String jobId;
 
     @Column(name = "JOB_TITLE")
     private String jobTitle;
@@ -19,12 +19,12 @@ public class Job {
     @Column(name = "MAX_SALARY")
     private Integer maxSalary;
 
-    public String getId() {
-        return id;
+    public String getJobId() {
+        return jobId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setJobId(String jobId) {
+        this.jobId = jobId;
     }
 
     public String getJobTitle() {
@@ -62,7 +62,7 @@ public class Job {
 
         Job job = (Job) o;
 
-        if (id != null ? !id.equals(job.id) : job.id != null) {
+        if (jobId != null ? !jobId.equals(job.jobId) : job.jobId != null) {
             return false;
         }
         if (jobTitle != null ? !jobTitle.equals(job.jobTitle) : job.jobTitle != null) {
@@ -80,7 +80,7 @@ public class Job {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = jobId != null ? jobId.hashCode() : 0;
         result = 31 * result + (jobTitle != null ? jobTitle.hashCode() : 0);
         result = 31 * result + (minSalary != null ? minSalary.hashCode() : 0);
         result = 31 * result + (maxSalary != null ? maxSalary.hashCode() : 0);

@@ -23,7 +23,7 @@ public class LocationDaoTest {
         location.setStreetAddress("test adresa");
         location = locationDao.insertLocation(location);
 
-        assertEquals(locationDao.getLocationById(location.getId()), location);
+        assertEquals(locationDao.getLocationById(location.getLocationId()), location);
     }
 
     @Test
@@ -31,13 +31,13 @@ public class LocationDaoTest {
         location.setStreetAddress("new postal code");
         location = locationDao.updateLocation(location);
 
-        assertEquals(locationDao.getLocationById(location.getId()), location);
+        assertEquals(locationDao.getLocationById(location.getLocationId()), location);
     }
 
     @Test
     public void cTestDeleteLocation() {
         locationDao.deleteLocation(location);
-        Location locById = locationDao.getLocationById(location.getId());
+        Location locById = locationDao.getLocationById(location.getLocationId());
 
         assertNull(locById);
     }

@@ -11,7 +11,7 @@ import java.sql.Date;
 public class Employee {
 
     @Id(name = "EMPLOYEE_ID")
-    private Long id;
+    private Long employeeId;
 
     @Column(name = "FIRST_NAME")
     private String firstName;
@@ -43,12 +43,12 @@ public class Employee {
     @Column(name = "DEPARTMENT_ID")
     private Long departmentId;
 
-    public Long getId() {
-        return id;
+    public Long getEmployeeId() {
+        return employeeId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getFirstName() {
@@ -154,7 +154,7 @@ public class Employee {
         if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) {
             return false;
         }
-        if (id != null ? !id.equals(employee.id) : employee.id != null) {
+        if (employeeId != null ? !employeeId.equals(employee.employeeId) : employee.employeeId != null) {
             return false;
         }
         if (jobId != null ? !jobId.equals(employee.jobId) : employee.jobId != null) {
@@ -178,7 +178,7 @@ public class Employee {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = employeeId != null ? employeeId.hashCode() : 0;
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);

@@ -8,7 +8,7 @@ import ro.teamnet.zth.api.annotations.Table;
 public class Department {
 
     @Id(name = "department_id")
-    private Long id;
+    private Long departmentId;
 
     @Column(name = "department_name")
     private String departmentName;
@@ -16,12 +16,12 @@ public class Department {
     @Column(name = "location_id")
     private Long location;
 
-    public Long getId() {
-        return id;
+    public Long getDepartmentId() {
+        return departmentId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
     }
 
     public String getDepartmentName() {
@@ -47,7 +47,7 @@ public class Department {
 
         Department that = (Department) o;
 
-        if (!id.equals(that.id)) return false;
+        if (!departmentId.equals(that.departmentId)) return false;
         if (!departmentName.equals(that.departmentName)) return false;
         return true;
 
@@ -55,7 +55,7 @@ public class Department {
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
+        int result = departmentId.hashCode();
         result = 31 * result + departmentName.hashCode();
         return result;
     }
@@ -63,7 +63,7 @@ public class Department {
     @Override
     public String toString() {
         return "Department{" +
-                "id=" + id +
+                "departmentId=" + departmentId +
                 ", departmentName='" + departmentName + '\'' +
                 ", location=" + location +
                 '}';
